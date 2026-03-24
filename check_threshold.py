@@ -2,10 +2,10 @@ import sys
 import os
 import mlflow
 
-# Force MLflow to read from the exact local path where GitHub downloaded the artifact
+# Tell MLflow to read from our portable database file
 tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "").strip()
 if not tracking_uri:
-    tracking_uri = f"file://{os.getcwd()}/mlruns"
+    tracking_uri = "sqlite:///mlflow.db"
 mlflow.set_tracking_uri(tracking_uri)
 
 try:
@@ -22,6 +22,8 @@ try:
     accuracy = float(run.data.metrics.get("accuracy", 0.0))
 except Exception as e:
     print(f"Error fetching MLflow run: {e}")
+    print("Make sure mlflow.db downloaded correctly. Current files:")
+    os.system("ls -la")
     sys.exit(1)
 
 print(f"Detected Model Accuracy: {accuracy}")

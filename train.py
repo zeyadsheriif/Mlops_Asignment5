@@ -1,10 +1,10 @@
 import os
 import mlflow
 
-# Fulfill rubric requirement: Use secret if available, otherwise fallback to local exact path
+# Use a portable SQLite database instead of a folder to survive the artifact transfer
 tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "").strip()
 if not tracking_uri:
-    tracking_uri = f"file://{os.getcwd()}/mlruns"
+    tracking_uri = "sqlite:///mlflow.db"
 mlflow.set_tracking_uri(tracking_uri)
 
 target_accuracy = 0.95
