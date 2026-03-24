@@ -2,7 +2,7 @@ import os
 import mlflow
 
 
-target_accuracy = 0.90
+target_accuracy = 0.95
 
 print("Starting model training...")
 
