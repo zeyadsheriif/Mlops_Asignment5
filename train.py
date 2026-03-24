@@ -1,5 +1,6 @@
-import os
 import mlflow
+
+mlflow.set_tracking_uri("file:./mlruns")
 
 
 target_accuracy = 0.95
