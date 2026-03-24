@@ -7,7 +7,7 @@ on:
 
 env:
   MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
-  MOCK_ACCURACY: "0.95" 
+  MOCK_ACCURACY: "0.90" 
 
 jobs:
   validate:

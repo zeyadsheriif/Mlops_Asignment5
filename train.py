@@ -2,7 +2,7 @@ import os
 import mlflow
 
 
-target_accuracy = float(os.getenv("MOCK_ACCURACY", "0.80"))
+target_accuracy = float(os.getenv("MOCK_ACCURACY", "0.90"))
 
 print("Starting model training...")
 
