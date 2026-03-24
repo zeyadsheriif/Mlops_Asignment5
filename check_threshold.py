@@ -2,7 +2,6 @@ import sys
 import os
 import mlflow
 
-# Tell MLflow to read from our portable database file
 tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "").strip()
 if not tracking_uri:
     tracking_uri = "sqlite:///mlflow.db"
@@ -29,8 +28,8 @@ except Exception as e:
 print(f"Detected Model Accuracy: {accuracy}")
 
 if accuracy < 0.85:
-    print("❌ Validation FAILED: Accuracy is below the 0.85 threshold.")
+    print("Validation FAILED: Accuracy is below the 0.85 threshold.")
     sys.exit(1)
 else:
-    print("✅ Validation PASSED: Accuracy meets the threshold.")
+    print("Validation PASSED: Accuracy meets the threshold.")
     sys.exit(0)
