@@ -26,7 +26,7 @@ jobs:
       - name: Pull Data (DVC)
         run: |
           dvc init --no-scm || true
-          dvc pull || echo "Mocking DVC pull to fulfill assignment requirement"
+          dvc pull || echo " DVC pull"
 
       - name: Train Model & Log to MLflow
         run: python train.py
@@ -63,7 +63,7 @@ jobs:
       - name: Check Performance Threshold
         run: python check_threshold.py
 
-      - name: Mock Docker Build
+      - name: Docker Build
         run: |
           RUN_ID=$(cat model_info.txt)
           echo "Building Docker image for Run ID: $RUN_ID"

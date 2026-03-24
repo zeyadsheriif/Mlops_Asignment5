@@ -28,8 +28,8 @@ except Exception as e:
 print(f"Detected Model Accuracy: {accuracy}")
 
 if accuracy < 0.85:
-    print("Validation FAILED: Accuracy is below the 0.85 threshold.")
+    print(" FAILED: Accuracy is below the 0.85 threshold.")
     sys.exit(1)
 else:
-    print("Validation PASSED: Accuracy meets the threshold.")
+    print(" PASSED: Accuracy meets the threshold.")
     sys.exit(0)
