@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  MLFLOW_TRACKING_URI: "file://${{ github.workspace }}/mlruns"
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -20,16 +23,10 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Pull Data (Mock DVC)
-        run: |
-          # Initializing a fake DVC repo so the pull command doesn't crash the pipeline
-          dvc init --no-scm
-          dvc pull || echo "No remote configured, skipping actual pull to prevent crash."
-
       - name: Train Model & Log to MLflow
         run: python train.py
 
-      - name: Upload Artifacts (Run ID and MLflow DB)
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: deployment-artifacts
@@ -56,6 +53,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: deployment-artifacts
+          path: .
+
+      - name: Debug File System
+        run: |
+          echo "Checking if files downloaded correctly:"
+          ls -la
+          cat model_info.txt
 
       - name: Check Performance Threshold
         run: python check_threshold.py
